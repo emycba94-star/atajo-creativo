@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { QUESTIONS } from "@/lib/questions";
 import { currentWeek, shiftWeek, isAfter } from "@/lib/week";
 import type { Entry } from "@/lib/supabase";
@@ -11,6 +11,7 @@ export default function Panel() {
   const [passcode, setPasscode] = useState("");
   const [unlocked, setUnlocked] = useState(false);
   const [authError, setAuthError] = useState("");
+  const pcRef = useRef<HTMLInputElement>(null);
 
   const [week, setWeek] = useState(currentWeek());
   const [entries, setEntries] = useState<Entry[]>([]);
@@ -58,7 +59,15 @@ export default function Panel() {
 
   async function unlock() {
     setAuthError("");
-    const ok = await loadWeek(week.weekId, passcode);
+    // Leemos el valor real del campo (por si el navegador autocompletó
+    // o el onChange no registró), y limpiamos espacios.
+    const code = (pcRef.current?.value ?? passcode).trim();
+    if (!code) {
+      setAuthError("Escribí el passcode.");
+      return;
+    }
+    setPasscode(code);
+    const ok = await loadWeek(week.weekId, code);
     if (ok) setUnlocked(true);
   }
 
@@ -194,8 +203,14 @@ export default function Panel() {
             Passcode
           </label>
           <input
+            ref={pcRef}
             id="pc"
+            name="ac-panel-pass"
             type="password"
+            autoComplete="off"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
             value={passcode}
             onChange={(e) => setPasscode(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && unlock()}
@@ -207,7 +222,7 @@ export default function Panel() {
             </p>
           )}
           <div style={{ marginTop: 14 }}>
-            <button className="btn btn-primary" onClick={unlock} disabled={!passcode}>
+            <button className="btn btn-primary" onClick={unlock}>
               Entrar
             </button>
           </div>
