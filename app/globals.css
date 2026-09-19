@@ -461,3 +461,70 @@ input:focus {
     font-size: 25px;
   }
 }
+
+/* =========================================================
+   Modo oscuro — SOLO el panel (body.theme-dark).
+   Fondo oscuro violáceo + magenta que resalta.
+   ========================================================= */
+body.theme-dark {
+  --bg: #141019;
+  --card: #201a29;
+  --text: #f3eff8;
+  --muted: #9a8fa8;
+  --muted-2: #c3b9d0;
+  --border: #322a3d;
+  --border-2: #40364d;
+  --accent: #e83fae;
+  --accent-hover: #f25cbf;
+  --accent-soft: #2c1930;
+  --green: #34c759;
+  --green-soft: #16301f;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
+  background: var(--bg);
+}
+
+body.theme-dark .toggle {
+  background: #2a2333;
+}
+body.theme-dark .toggle button.active {
+  background: var(--card);
+  color: var(--text);
+}
+body.theme-dark .stat-bar {
+  background: #2a2333;
+}
+body.theme-dark .btn-ghost {
+  background: var(--card);
+}
+body.theme-dark .btn-ghost:hover {
+  background: #2a2333;
+}
+body.theme-dark .week-nav button {
+  background: var(--card);
+}
+body.theme-dark .week-nav button:hover:not(:disabled) {
+  background: #2a2333;
+}
+body.theme-dark .badge-sent {
+  background: #16301f;
+  color: #4ade80;
+}
+body.theme-dark .badge-draft {
+  background: #2a2333;
+  color: var(--muted-2);
+}
+body.theme-dark .error {
+  background: #3a1f22;
+  border-color: #5a2a2e;
+  color: #f6a9a3;
+}
+body.theme-dark textarea,
+body.theme-dark input[type="text"],
+body.theme-dark input[type="password"] {
+  background: #171320;
+  color: var(--text);
+}
+body.theme-dark textarea::placeholder,
+body.theme-dark input::placeholder {
+  color: #6a6076;
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { QUESTIONS } from "@/lib/questions";
 import { currentWeek, shiftWeek, isAfter } from "@/lib/week";
 import type { Entry } from "@/lib/supabase";
@@ -12,6 +12,12 @@ export default function Panel() {
   const [unlocked, setUnlocked] = useState(false);
   const [authError, setAuthError] = useState("");
   const pcRef = useRef<HTMLInputElement>(null);
+
+  // Modo oscuro con magenta: solo en el panel.
+  useEffect(() => {
+    document.body.classList.add("theme-dark");
+    return () => document.body.classList.remove("theme-dark");
+  }, []);
 
   const [week, setWeek] = useState(currentWeek());
   const [entries, setEntries] = useState<Entry[]>([]);
