@@ -228,14 +228,15 @@ export default function Home() {
               </>
             )}
           </span>
-          <button
-            className="btn btn-primary"
-            onClick={markSubmitted}
-            disabled={submitted}
-          >
-            {submitted ? "Ya enviado ✓" : "Marcar como enviado"}
+          <button className="btn btn-primary" onClick={markSubmitted}>
+            {submitted ? "Actualizar envío ✓" : "Marcar como enviado"}
           </button>
         </div>
+        {submitted && (
+          <p className="q-hint" style={{ marginTop: 10 }}>
+            Ya lo enviaste ✓ — podés seguir editando y reenviar cuando quieras.
+          </p>
+        )}
       </div>
 
       {history.filter((e) => e.week_id !== week.weekId).length > 0 && (
