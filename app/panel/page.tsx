@@ -23,6 +23,7 @@ export default function Panel() {
   const [analyzing, setAnalyzing] = useState(false);
   const [analyzeError, setAnalyzeError] = useState("");
   const [copied, setCopied] = useState(false);
+  const [refreshed, setRefreshed] = useState(false);
 
   const current = currentWeek();
   const canGoForward = isAfter(current.weekId, week.weekId);
@@ -69,6 +70,12 @@ export default function Panel() {
     setPasscode(code);
     const ok = await loadWeek(week.weekId, code);
     if (ok) setUnlocked(true);
+  }
+
+  async function refresh() {
+    await loadWeek(week.weekId, passcode);
+    setRefreshed(true);
+    setTimeout(() => setRefreshed(false), 1500);
   }
 
   function changeWeek(delta: number) {
@@ -290,6 +297,9 @@ export default function Panel() {
       {/* Toolbar */}
       <div className="card" style={{ marginTop: 16 }}>
         <div className="toolbar">
+          <button className="btn btn-ghost" onClick={refresh} disabled={loading}>
+            {loading ? "Actualizando…" : refreshed ? "✓ Actualizado" : "🔄 Actualizar"}
+          </button>
           <button className="btn btn-ghost" onClick={exportCSV}>
             ⬇ Exportar CSV
           </button>
