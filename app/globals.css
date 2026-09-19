@@ -12,9 +12,9 @@
   --muted-2: #6b6b70;
   --border: #e5e5ea;      /* hairline iOS */
   --border-2: #d8d8dd;
-  --accent: #007aff;      /* azul iOS */
-  --accent-hover: #0063cc;
-  --accent-soft: #eaf3ff;
+  --accent: #c81e8f;      /* magenta */
+  --accent-hover: #a81679;
+  --accent-soft: #fbeaf5;
   --green: #34c759;
   --green-soft: #e7f9ec;
   --amber-soft: #fff4e5;
@@ -103,11 +103,11 @@ h2 {
 
 .welcome {
   background: var(--accent-soft);
-  border: 1px solid #d6e8ff;
+  border: 1px solid #f2cbe4;
   border-radius: var(--radius);
   padding: 16px 18px;
   font-size: 15px;
-  color: #35485c;
+  color: #6f2a58;
   line-height: 1.55;
 }
 
